@@ -1,0 +1,6 @@
+com\Domain\PictureSys\PictureDAO.class
+com\Domain\PictureSys\PictureManager.class
+com\Domain\PictureSys\PictureDAOImpl.class
+com\Domain\PictureSys\Picture.class
+com\ServletControl\AlbumServlet.class
+com\ServletControl\PictureServlet.class
