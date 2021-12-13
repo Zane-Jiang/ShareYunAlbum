@@ -20,6 +20,15 @@ public class UserDAOImpl extends BaseDAO implements UserDAO  {
         User user= getInstance(conn,User.class, sql,userID);
         return user;
     }
+
+    @Override
+    public User getUserByPhone(Connection conn, String phone) {
+        String sql = "select user_id,user_name,user_authentication_string from user where user_phone = ?";
+        User user= getInstance(conn,User.class, sql,phone);
+        return user;
+    }
+
+
     @Override
     public boolean crteateUserById(Connection conn, String user_id, String user_authentication_string) {
 

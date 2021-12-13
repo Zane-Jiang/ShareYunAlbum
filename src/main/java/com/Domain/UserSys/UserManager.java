@@ -1,6 +1,7 @@
 package com.Domain.UserSys;
 
 import com.ServiceUtils.DBConnection;
+import com.ServiceUtils.MessageService;
 
 import java.sql.Connection;
 
@@ -8,6 +9,7 @@ public class UserManager {
 
     /**
      * 密码登录
+     *
      * @param userID
      * @param password
      * @return
@@ -19,19 +21,19 @@ public class UserManager {
         UserDAOImpl userDAO = new UserDAOImpl();
         try {
             connection = DBConnection.getConnection();
-            user =  userDAO.getUserById(connection,userID);
+            user = userDAO.getUserById(connection, userID);
         } catch (Exception e) {
             e.printStackTrace();
-        }finally {
-            DBConnection.closeResource(connection,null);
+        } finally {
+            DBConnection.closeResource(connection, null);
         }
 
-        if(user == null){
+        if (user == null) {
             System.out.println("用户名不存在");
             user = new User();
             user.setStatus("101");//设置用户无效
-        }else{
-            if(!password.equals(user.getUser_authentication_string())){
+        } else {
+            if (!password.equals(user.getUser_authentication_string())) {
                 System.out.println("密码错误");
                 user.setStatus("102");
             }
@@ -39,72 +41,91 @@ public class UserManager {
         return user;
     }
 
-    public static String signUpByPassword(String userID,String password){
+    public static String signUpByPassword(String userID, String password) {
         String status = "100";
         Connection connection = null;
         UserDAOImpl userDAO = new UserDAOImpl();
         User user = null;
         try {
             connection = DBConnection.getConnection();
-            user = userDAO.getUserById(connection,userID);
-            if(user != null){
+            user = userDAO.getUserById(connection, userID);
+            if (user != null) {
                 //账号已注册，失败
                 status = "101";
-            }else{
-                if(!userDAO.crteateUserById(connection,userID,password))
+            } else {
+                if (!userDAO.crteateUserById(connection, userID, password))
                     //注册时发生的未知错误
                     status = "102";
             }
         } catch (Exception e) {
             e.printStackTrace();
-        }finally {
-            DBConnection.closeResource(connection,null);
+        } finally {
+            DBConnection.closeResource(connection, null);
         }
         return status;
     }
 
-    public static String modifyUserPublicInfo(String userID,String userName,String userDesc,String userSex)
-    {
-        String status="101";
+    public static String modifyUserPublicInfo(String userID, String userName, String userDesc, String userSex) {
+        String status = "101";
         Connection connection = null;
         UserDAOImpl userDAO = new UserDAOImpl();
         try {
             connection = DBConnection.getConnection();
-            if(userDAO.modifyUserPublicInfo(connection,userID,userName,userDesc,userSex))
-            {
-                status="100";
+            if (userDAO.modifyUserPublicInfo(connection, userID, userName, userDesc, userSex)) {
+                status = "100";
             }
-        }catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
-        }finally {
-            DBConnection.closeResource(connection,null);
+        } finally {
+            DBConnection.closeResource(connection, null);
         }
         return status;
     }
 
-    public static String deleteUserByPassword(String userID,String password){
+    public static String deleteUserByPassword(String userID, String password) {
         String status = "102";
         Connection connection = null;
         UserDAOImpl userDAO = new UserDAOImpl();
         User user = null;
         try {
             connection = DBConnection.getConnection();
-            user = userDAO.getUserById(connection,userID);
+            user = userDAO.getUserById(connection, userID);
 //            此时传输过来的账号密码一定是存在的，因为他是登陆状态的，所以user！=null
-            if(user.getUser_authentication_string().equals(password)){
+            if (user.getUser_authentication_string().equals(password)) {
 //                如果密码正确，则删除
-                if(userDAO.deleteUserById(connection,userID)){
+                if (userDAO.deleteUserById(connection, userID)) {
                     status = "100";
                 }
-            }else {
+            } else {
 //                密码错误
                 status = "101";
             }
 
         } catch (Exception e) {
             e.printStackTrace();
-        }finally {
-            DBConnection.closeResource(connection,null);
+        } finally {
+            DBConnection.closeResource(connection, null);
+        }
+        return status;
+    }
+
+    public static String sendMessage(String phone) {
+        String status = "";
+        Connection connection = null;
+        UserDAOImpl userDAO = new UserDAOImpl();
+        try {
+            connection = DBConnection.getConnection();
+            if (userDAO.getUserByPhone(connection, phone) == null) {
+                status = "2011";
+            } else {
+                if (MessageService.sendMessage(phone)) {
+                    status = "2010";
+                } else {
+                    status = "2012";
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
         return status;
     }

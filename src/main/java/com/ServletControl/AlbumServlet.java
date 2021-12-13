@@ -69,6 +69,9 @@ public class AlbumServlet extends HttpServlet {
                 JSONObject data = new JSONObject();
                 data.put("option",option);
                 data.put("album_id",album_id);
+
+                respWriter.print(data);
+                respWriter.close();
             }
 
         }

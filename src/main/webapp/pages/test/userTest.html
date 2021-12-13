@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>userTest</title>
+</head>
+<body>
+
+
+
+<h1>sendMessage</h1>
+<form action="http://localhost:8080/ShareYunAlbum/userServlet" method="post" >
+    option <input type="text" name="option" value="signIn">
+   type<input type="text" name="type" value="sendMessage"><br>
+    phone<input type="text"name="phone" value="18550626563"><br>
+    <input type="submit" value="发送">
+</form>
+
+
+
+
+
+<h1>modifyInfo</h1>
+<form action="http://localhost:8080/ShareYunAlbum/userServlet" method="post">
+    option <input type="text" name="option" value="modifyInfo">
+    type<input type="text" name="type" value="1"><br>
+
+    userID <input type="text" name="userID" value="123456">
+    UserName<input type="text" name="UserName" value="蒋泽"><br>
+
+    UserDescription <input type="text" name="UserDescription" value="UserDescription">
+    UserSex<input type="text" name="UserSex" value="男"><br>
+
+    <input type="submit" value="修改">
+</form>
+
+
+
+<h1>downloadTest</h1>
+<form action="http://localhost:8080/ShareYunAlbum/pictureServlet" method="get">
+    option <input type="text" name="option" value="download">
+    pic_id<input type="text" name="pic_id" value="1234562021121114314920211211192019"><br>
+    <input type="submit" value="下载">
+</form>
+
+
+
+</body>
+</html>
