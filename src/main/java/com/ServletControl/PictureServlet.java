@@ -59,7 +59,8 @@ public class PictureServlet extends HttpServlet {
 
 //            将接收到的inputStream转化为blob
             Blob pic_blob = null;
-//            pic_blob = SQLInput
+//            1.inputStream-->byte[]
+
 
 //                分段格式时处理图片上传
             switch (option){

@@ -1,9 +1,7 @@
 package com.ServletControl;
-
 import com.Domain.AlbumSys.Album;
 import com.Domain.AlbumSys.AlbumManager;
 import com.alibaba.fastjson.JSONObject;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -64,12 +62,11 @@ public class AlbumServlet extends HttpServlet {
                 break;
             }
             case "getAlbumId":{
-                String user_id = req.getParameter("user_id");
-                String [] album_id = AlbumManager.getAlbumId(user_id);
+                String user_phone = req.getParameter("user_phone");
+                String [] album_id = AlbumManager.getAlbumId(user_phone);
                 JSONObject data = new JSONObject();
                 data.put("option",option);
                 data.put("album_id",album_id);
-
                 respWriter.print(data);
                 respWriter.close();
             }

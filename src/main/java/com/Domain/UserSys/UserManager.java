@@ -6,72 +6,13 @@ import com.ServiceUtils.MessageService;
 import java.sql.Connection;
 
 public class UserManager {
-
-    /**
-     * 密码登录
-     *
-     * @param userID
-     * @param password
-     * @return
-     */
-    public static User signInByPassword(String userID, String password) {
-        //System.out.println("UserManager:userID=>"+userID);
-        User user = null;
-        Connection connection = null;
-        UserDAOImpl userDAO = new UserDAOImpl();
-        try {
-            connection = DBConnection.getConnection();
-            user = userDAO.getUserById(connection, userID);
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            DBConnection.closeResource(connection, null);
-        }
-
-        if (user == null) {
-            System.out.println("用户名不存在");
-            user = new User();
-            user.setStatus("101");//设置用户无效
-        } else {
-            if (!password.equals(user.getUser_authentication_string())) {
-                System.out.println("密码错误");
-                user.setStatus("102");
-            }
-        }
-        return user;
-    }
-
-    public static String signUpByPassword(String userID, String password) {
-        String status = "100";
-        Connection connection = null;
-        UserDAOImpl userDAO = new UserDAOImpl();
-        User user = null;
-        try {
-            connection = DBConnection.getConnection();
-            user = userDAO.getUserById(connection, userID);
-            if (user != null) {
-                //账号已注册，失败
-                status = "101";
-            } else {
-                if (!userDAO.crteateUserById(connection, userID, password))
-                    //注册时发生的未知错误
-                    status = "102";
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            DBConnection.closeResource(connection, null);
-        }
-        return status;
-    }
-
-    public static String modifyUserPublicInfo(String userID, String userName, String userDesc, String userSex) {
+    public static String modifyUserPublicInfo(String userPhone, String userName, String userDesc, String userSex) {
         String status = "101";
         Connection connection = null;
         UserDAOImpl userDAO = new UserDAOImpl();
         try {
             connection = DBConnection.getConnection();
-            if (userDAO.modifyUserPublicInfo(connection, userID, userName, userDesc, userSex)) {
+            if (userDAO.modifyUserPublicInfo(connection, userPhone, userName, userDesc, userSex)) {
                 status = "100";
             }
         } catch (Exception e) {
@@ -82,46 +23,31 @@ public class UserManager {
         return status;
     }
 
-    public static String deleteUserByPassword(String userID, String password) {
-        String status = "102";
-        Connection connection = null;
-        UserDAOImpl userDAO = new UserDAOImpl();
-        User user = null;
-        try {
-            connection = DBConnection.getConnection();
-            user = userDAO.getUserById(connection, userID);
-//            此时传输过来的账号密码一定是存在的，因为他是登陆状态的，所以user！=null
-            if (user.getUser_authentication_string().equals(password)) {
-//                如果密码正确，则删除
-                if (userDAO.deleteUserById(connection, userID)) {
-                    status = "100";
-                }
-            } else {
-//                密码错误
-                status = "101";
-            }
 
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            DBConnection.closeResource(connection, null);
-        }
-        return status;
-    }
 
     public static String sendMessage(String phone) {
+
+
         String status = "";
         Connection connection = null;
         UserDAOImpl userDAO = new UserDAOImpl();
         try {
             connection = DBConnection.getConnection();
-            if (userDAO.getUserByPhone(connection, phone) == null) {
-                status = "2011";
+
+            //首先判断是不是新用户
+            if (userDAO.getUserByPhone(connection, phone) != null) {
+                if(MessageService.sendMessage(phone)){
+                    status="100";
+//                    不是新用户，且信息发送成功
+                }else{
+                    status= "101";
+                }
             } else {
                 if (MessageService.sendMessage(phone)) {
-                    status = "2010";
+                    status = "200";
+//                    新用户，且短信发送成功
                 } else {
-                    status = "2012";
+                    status = "201";
                 }
             }
         } catch (Exception e) {
@@ -130,13 +56,59 @@ public class UserManager {
         return status;
     }
 
-    public static String checkAutoCode(String phone, String autoCode) {
-        String status = "2022";
-        if(autoCode.equals(MessageService.getParams(phone)[0])){
-            status ="2020";
-        }else{
-            status = "2021";
+    public static User getUserByPhone(String phone) {
+        Connection connection = null;
+        UserDAOImpl userDAO = new UserDAOImpl();
+        User user = new User();
+        try {
+            connection =DBConnection.getConnection();
+             user = userDAO.getUserByPhone(connection,phone);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }finally {
+            DBConnection.closeResource(connection,null);
+        }
+        return user;
+    }
+
+    public static User createUserByPhone(String phone) {
+        Connection connection = null;
+        UserDAOImpl userDAO = new UserDAOImpl();
+        User user = new User();
+        try {
+            connection =DBConnection.getConnection();
+            if(userDAO.crteateUserByPhone(connection,phone)){
+            user = userDAO.getUserByPhone(connection,phone);}
+        } catch (Exception e) {
+            e.printStackTrace();
+        }finally {
+            DBConnection.closeResource(connection,null);
+        }
+        return user;
+    }
+
+    public static String deleteUserByPhone(String phone, String autoCode) {
+
+        String status = "102";
+        UserDAOImpl userDAO = new UserDAOImpl();
+        Connection connection = null;
+
+        try {
+            connection =DBConnection.getConnection();
+            if(autoCode.equals(MessageService.getParams(phone)[0])){
+                if(userDAO.deleteUserByPhone(connection,phone)){
+                    status = "100";
+                }
+            }else {
+                status = "101";
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }finally {
+            DBConnection.closeResource(connection,null);
         }
         return status;
+
+
     }
 }

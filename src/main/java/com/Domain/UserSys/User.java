@@ -5,19 +5,18 @@ import java.io.InputStream;
 import java.util.Date;
 
 public class User {
-    private String user_id;
+    private String user_phone;
     private  String user_name;
     private String user_authentication_string;
     private  String user_email;
     private String user_description;
     private String user_sex;
     private InputStream user_avatar;
-    private String user_phone;
+
     private Date user_registertime;
 
     private  String status;
     public User() {
-        this.user_id = "user_id-1-1-1-1-1-1-1-1-1";//
         this.user_name = "user_name";
         this.user_authentication_string = "authentication_string";
         this.user_email = "user_email";
@@ -28,8 +27,7 @@ public class User {
         this.user_registertime =null;
         this.status = "100";
     }
-    public User(String user_id, String user_name, String authentication_string, String user_email, String user_description, String user_sex, FileInputStream user_avatar, String user_phone, Date user_registertime) {
-        this.user_id = user_id;
+    public User(String user_name, String authentication_string, String user_email, String user_description, String user_sex, FileInputStream user_avatar, String user_phone, Date user_registertime) {
         this.user_name = user_name;
         this.user_authentication_string = authentication_string;
         this.user_email = user_email;
@@ -54,10 +52,6 @@ public class User {
 //获取对象属性方法：
     public String getUser_authentication_string() {
         return user_authentication_string;
-    }
-
-    public String getUser_id() {
-        return user_id;
     }
 
     public String getUser_name() {
@@ -97,7 +91,7 @@ public class User {
 
     @Override
     public String toString() {
-        String str = "[user: "+"user_id: "+user_id+"  user_name: " +user_name+"  authentication_string: "+user_authentication_string+
+        String str = "[user: "+"user_id: "+"  user_name: " +user_name+"  authentication_string: "+user_authentication_string+
                 "  user_email:  "+user_email+"]";
         return str;
     }
