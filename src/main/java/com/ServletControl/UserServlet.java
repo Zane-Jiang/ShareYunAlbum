@@ -64,6 +64,8 @@ public class UserServlet extends HttpServlet {
                 JSONObject data = new JSONObject();
                 data.put("option", option);
                 data.put("autoCode", autoCode);
+                System.out.println(status);
+                System.out.println("servlet:++++++"+user);
                 data.put("user_sex",user.getUser_sex());
                 data.put("user_description",user.getUser_description());
                 data.put("user_name",user.getUser_name());

@@ -11,7 +11,7 @@ public class UserDAOImpl extends BaseDAO implements UserDAO  {
 
     @Override
     public User getUserByPhone(Connection conn, String phone) {
-        String sql = "select user_id,user_name,user_authentication_string from user where user_phone = ?";
+        String sql = "select * from user where user_phone = ?";
         User user= getInstance(conn,User.class, sql,phone);
         return user;
     }
@@ -23,10 +23,10 @@ public class UserDAOImpl extends BaseDAO implements UserDAO  {
 
 
     @Override
-    public boolean crteateUserByPhone(Connection conn, String phone) {
+    public boolean crteateUserByPhone(Connection conn, String phone,User user) {
 
-        String sql = "INSERT INTO user (user_phone,user_name, user_email, user_sex,user_avatar) VALUES (?, null, null, null, null,null)";
-       if( update(conn,sql,phone) == 1){
+        String sql = "INSERT INTO user (user_phone,user_name,user_sex,user_avatar,user_description) VALUES (?, ?, ?, ?,?)";
+       if( update(conn,sql,phone,user.getUser_name(),user.getUser_sex(),user.getUser_avatar(),user.getUser_description()) == 1){
            return true;
        }
        return false;

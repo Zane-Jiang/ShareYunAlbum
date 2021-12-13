@@ -9,7 +9,8 @@ public interface UserDAO {
 
    boolean deleteUserById(Connection conn,String user_id);
 
-    boolean crteateUserByPhone(Connection conn, String phone);
+
+    boolean crteateUserByPhone(Connection conn, String phone, User user);
 
     boolean modifyUserPublicInfo(Connection conn, String user_id, String user_name, String user_desc, String user_sex);
 

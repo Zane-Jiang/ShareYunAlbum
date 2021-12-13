@@ -1,7 +1,5 @@
 package com.Domain.PictureSys;
 
-import java.io.FileInputStream;
-import java.sql.Blob;
 import java.util.Date;
 
 public class Picture {
@@ -9,8 +7,9 @@ public class Picture {
     private String pic_album;
     private  Date pic_uploadtime;
     private String  pic_description;
-    private Blob pic_blob;
+//    private Blob pic_blob;
 
+    private byte[] pic_blob;
 
     private String status;
 
@@ -22,13 +21,12 @@ public class Picture {
         this.status = status;
     }
 
-    public Picture(String pic_id, String pic_album, Date pic_uploadtime, String pic_description, Blob pic_blob) {
+    public Picture(String pic_id, String pic_album, Date pic_uploadtime, String pic_description, byte[]  pic_blob) {
         this.pic_id = pic_id;
         this.pic_album = pic_album;
         this.pic_uploadtime = pic_uploadtime;
         this.pic_description = pic_description;
         this.pic_blob = pic_blob;
-
         status = "101";
     }
 
@@ -61,8 +59,11 @@ public class Picture {
         return pic_description;
     }
 
-    public FileInputStream getPic_blob() {
-//        return pic_blob;
-        return null;
+//    public Blob getPic_blob() {
+//       return pic_blob;
+//    }
+
+    public byte[] getPic_blob() {
+        return pic_blob;
     }
 }

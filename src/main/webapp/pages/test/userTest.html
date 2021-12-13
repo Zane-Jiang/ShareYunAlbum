@@ -10,9 +10,10 @@
 
 <h1>sendMessage</h1>
 <form action="http://localhost:8080/ShareYunAlbum/userServlet" method="post" >
-    option <input type="text" name="option" value="signIn">
-   type<input type="text" name="type" value="sendMessage"><br>
+    option <input type="text" name="option" value="sendMessage">
+    <br>
     phone<input type="text"name="phone" value="18550626563"><br>
+
     <input type="submit" value="发送">
 </form>
 
@@ -22,29 +23,24 @@
 
 <h1>modifyInfo</h1>
 <form action="http://localhost:8080/ShareYunAlbum/userServlet" method="post">
-    option <input type="text" name="option" value="modifyInfo">
-    type<input type="text" name="type" value="1"><br>
-
-    userID <input type="text" name="userID" value="123456">
-    UserName<input type="text" name="UserName" value="蒋泽"><br>
-
-    UserDescription <input type="text" name="UserDescription" value="UserDescription">
-    UserSex<input type="text" name="UserSex" value="男"><br>
-
-    <input type="submit" value="修改">
+    option <input type="text" name="option" value="checkAutoCode">
+    type<input type="text" name="type" value="signIn"><br>
+    phone <input type="text" name="phone" value="18550626563">
+    autoCode <input type="text" name="autoCode" value="784256">
+    <input type="submit" value="登陆">
 </form>
 
 
 
 <h1>checkCodeTest</h1>
 <form action="http://localhost:8080/ShareYunAlbum/userServlet" method="post">
-    option <input type="text" name="option" value="signIn">
+    option <input type="text" name="option" value="checkAutoCode">
     <br>
-    type<input type="text" name="type" value="checkAutoCode">
+    type<input type="text" name="type" value="signIn">
     <br>
     phone<input type="text" name="phone" value="18550626563">
     <br>
-    autuCode <input type="text" name="autoCode" value="784256">
+    autuCode <input type="text" name="autoCode" value="784265">
     <br>
     <input type="submit" value="验证">
 </form>

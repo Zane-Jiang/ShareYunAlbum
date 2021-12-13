@@ -49,26 +49,33 @@ public class PictureServlet extends HttpServlet {
                         }
                     }else{
                         if(fileItem.getFieldName().equals("pic_blob"));
+                        System.out.print("pic_blobget   ==== ");
 //                        pic_blob_stream = (FileInputStream) fileItem;
                         pic_blob_stream = fileItem.getInputStream();
+                        System.out.println(pic_blob_stream);
                     }
                 }
             } catch (Exception e) {
                 e.printStackTrace();
             }
 
+
 //            将接收到的inputStream转化为blob
             Blob pic_blob = null;
 //            1.inputStream-->byte[]
+            byte[] pic_byte = IOUtils.toByteArray(pic_blob_stream);
 
+//            try {
+//                pic_blob = new SerialBlob(temp);
+//            } catch (SQLException throwables) {
+//                throwables.printStackTrace();
+//            }
 
 //                分段格式时处理图片上传
             switch (option){
                 case "upload":{
                     PrintWriter respWriter = resp.getWriter();
-
-
-                    Picture picture = PictureManager.upload(pic_album,pic_description,pic_blob);
+                    Picture picture = PictureManager.upload(pic_album,pic_description,pic_byte);
                     JSONObject data = new JSONObject();
                     data.put("status",picture.getStatus());
                     data.put("pic_createtime",picture.getPic_uploadtime());
@@ -78,6 +85,7 @@ public class PictureServlet extends HttpServlet {
                 }break;
             }
         }
+
         else{
             PrintWriter respWriter = resp.getWriter();
             String option = req.getParameter("option");

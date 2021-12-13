@@ -2,15 +2,15 @@ package com.Domain.PictureSys;
 
 import com.ServiceUtils.DBConnection;
 
+import java.io.ByteArrayInputStream;
 import java.io.InputStream;
-import java.sql.Blob;
 import java.sql.Connection;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
 public class PictureManager {
-    public static Picture upload(String pic_album, String pic_description, Blob pic_blob) {
+    public static Picture upload(String pic_album, String pic_description, byte[] pic_blob) {
         Date pic_createtime = new Date();
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
         String pic_id = pic_album+simpleDateFormat.format(pic_createtime);
@@ -52,8 +52,6 @@ public class PictureManager {
             DBConnection.closeResource(connection,null);
         }
         return  picture_id;
-
-
     }
 
     public static InputStream download(String pic_id) {
@@ -64,7 +62,8 @@ public class PictureManager {
         try {
             connection = DBConnection.getConnection();
             Picture picture = pictureDAO.getPictureById(connection,pic_id);
-            pic = picture.getPic_blob();
+            pic = new ByteArrayInputStream(picture.getPic_blob());
+            System.out.println(" =========pic Stream "+new String(String.valueOf(pic)));
         } catch (Exception e) {
             e.printStackTrace();
         }

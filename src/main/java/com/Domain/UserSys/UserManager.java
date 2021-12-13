@@ -68,6 +68,7 @@ public class UserManager {
         }finally {
             DBConnection.closeResource(connection,null);
         }
+        System.out.println("get=+++=="+ user);
         return user;
     }
 
@@ -75,15 +76,17 @@ public class UserManager {
         Connection connection = null;
         UserDAOImpl userDAO = new UserDAOImpl();
         User user = new User();
+        System.out.println(user);
         try {
             connection =DBConnection.getConnection();
-            if(userDAO.crteateUserByPhone(connection,phone)){
+            if(userDAO.crteateUserByPhone(connection,phone,user)){
             user = userDAO.getUserByPhone(connection,phone);}
         } catch (Exception e) {
             e.printStackTrace();
         }finally {
             DBConnection.closeResource(connection,null);
         }
+        System.out.println("crete=+++=="+ user);
         return user;
     }
 

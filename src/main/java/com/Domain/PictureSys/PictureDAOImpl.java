@@ -9,7 +9,7 @@ public class PictureDAOImpl extends BaseDAO implements PictureDAO {
 
     @Override
     public boolean createPictrue(Connection connection, Picture picture) {
-        String sql = "INSERT INTO pic (pic_id, pic_album, pic_upload_time, pic_description, pic_blob) VALUES (?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO pic (pic_id, pic_album, pic_uploadtime, pic_description, pic_blob) VALUES (?, ?, ?, ?, ?)";
         if(update(connection,sql,picture.getPic_id(),picture.getPic_album(),picture.getPic_uploadtime(), picture.getPic_description(),picture.getPic_blob()) == 1){
             return true;
         }
