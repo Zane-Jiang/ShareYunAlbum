@@ -36,11 +36,17 @@
 
 
 
-<h1>downloadTest</h1>
-<form action="http://localhost:8080/ShareYunAlbum/pictureServlet" method="get">
-    option <input type="text" name="option" value="download">
-    pic_id<input type="text" name="pic_id" value="1234562021121114314920211211192019"><br>
-    <input type="submit" value="下载">
+<h1>checkCodeTest</h1>
+<form action="http://localhost:8080/ShareYunAlbum/userServlet" method="post">
+    option <input type="text" name="option" value="signIn">
+    <br>
+    type<input type="text" name="type" value="checkAutoCode">
+    <br>
+    phone<input type="text" name="phone" value="18550626563">
+    <br>
+    autuCode <input type="text" name="autoCode" value="784256">
+    <br>
+    <input type="submit" value="验证">
 </form>
 
 

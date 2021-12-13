@@ -33,8 +33,10 @@ public class UserServlet extends HttpServlet {
             case "signIn": {
                 System.out.print("signin  ");
                 String type = req.getParameter("type");
+                System.out.println("type     "+type);
                 switch (type) {
                     //通过账号密码登录
+
 
                     case "authenticateByPassword": {
                         System.out.println("authenticateByPassword");
@@ -60,20 +62,31 @@ public class UserServlet extends HttpServlet {
                     break;
                     case "sendMessage": {
                         String phone = req.getParameter("phone");
-                        System.out.println("发送短信到"+phone);
+                        System.out.println("发送短信到" + phone);
                         String status = UserManager.sendMessage(phone);
                         JSONObject data = new JSONObject();
                         data.put("option", option);
                         data.put("type", type);
-                        data.put("status",status);
+                        data.put("status", status);
                         respWriter.print(data);
                         respWriter.close();
                     }
                     break;
-                    case "checkAotuCode":
+                    case "checkAutoCode": {
                         System.out.println("验证短信验证码");
-                        break;
+                        String phone = req.getParameter("phone");
+                        String autoCode = req.getParameter("autoCode");
+
+                        JSONObject data = new JSONObject();
+                        data.put("phone", phone);
+                        data.put("autoCode", autoCode);
+                        data.put("status", UserManager.checkAutoCode(phone, autoCode));
+                        respWriter.print(data);
+                        respWriter.close();
+                    }
+                    break;
                     default:
+                        System.out.println("type defalut");
                         break;
                 }
             }
@@ -104,8 +117,8 @@ public class UserServlet extends HttpServlet {
                 }
             }
             break;
-            case "modifyUser": {
-                System.out.println("modifyUser =========================");
+            case "modifyInfo": {
+                System.out.println("modifyInfo =========================");
                 String type = req.getParameter("type");
                 switch (type) {
                     //非必须信息

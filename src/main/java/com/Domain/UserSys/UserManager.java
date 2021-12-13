@@ -129,4 +129,14 @@ public class UserManager {
         }
         return status;
     }
+
+    public static String checkAutoCode(String phone, String autoCode) {
+        String status = "2022";
+        if(autoCode.equals(MessageService.getParams(phone)[0])){
+            status ="2020";
+        }else{
+            status = "2021";
+        }
+        return status;
+    }
 }

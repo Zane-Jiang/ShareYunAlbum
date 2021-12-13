@@ -33,7 +33,7 @@ public class MessageService {
 
 
 
-    private  static String[] getParams(String phone){
+    public   static String[] getParams(String phone){
         String [] params = {""};
         String Code =null;
 //         Date date = new Date();
