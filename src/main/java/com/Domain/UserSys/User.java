@@ -15,12 +15,12 @@ public class User {
 
     private  String status;
     public User() {
-        this.user_name = "user_name";
-        this.user_description =" user_description";
-        this.user_sex =" n";
+        this.user_name = "default user";
+        this.user_description =" default description";
+        this.user_sex =" men";
         this.user_avatar = null;
         this.user_phone =" user_phone";
-        this.user_registertime =null;
+        this.user_registertime = new Date();
         this.status = "100";
     }
     public User(String user_name,  String user_email, String user_description, String user_sex, FileInputStream user_avatar, String user_phone, Date user_registertime) {

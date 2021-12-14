@@ -66,9 +66,10 @@ public class UserServlet extends HttpServlet {
                 data.put("autoCode", autoCode);
                 System.out.println(status);
                 System.out.println("servlet:++++++"+user);
+                if(user != null){
                 data.put("user_sex",user.getUser_sex());
                 data.put("user_description",user.getUser_description());
-                data.put("user_name",user.getUser_name());
+                data.put("user_name",user.getUser_name());}
 
 
                 data.put("status", status);
