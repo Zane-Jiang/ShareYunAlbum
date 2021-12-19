@@ -62,8 +62,9 @@ public class PictureManager {
         try {
             connection = DBConnection.getConnection();
             Picture picture = pictureDAO.getPictureById(connection,pic_id);
-            pic = new ByteArrayInputStream(picture.getPic_blob());
-            System.out.println(" =========pic Stream "+new String(String.valueOf(pic)));
+            if(picture.getPic_blob() != null)
+                pic = new ByteArrayInputStream(picture.getPic_blob());
+//            System.out.println(" =========pic Stream "+new String(String.valueOf(pic)));
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -26,6 +26,12 @@ public class PictureServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
+        resp.setContentType("text/json; charset=UTF-8");
+        resp.setHeader("Access-Control-Allow-Methods", "*");
+        ;
+        resp.setHeader("Access-Control-Allow-Origin", "*"); //设置允许跨域访问
+        resp.setHeader("Access-Control-Allow-Credentials", "true");
+        resp.setHeader("Access-Control-Allow-Headers", "*");
         System.out.println("post  =======================");
 
         //上传时的文件时分段的
@@ -114,6 +120,12 @@ public class PictureServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        resp.setContentType("text/json; charset=UTF-8");
+        resp.setHeader("Access-Control-Allow-Methods", "*");
+        ;
+        resp.setHeader("Access-Control-Allow-Origin", "*"); //设置允许跨域访问
+        resp.setHeader("Access-Control-Allow-Credentials", "true");
+        resp.setHeader("Access-Control-Allow-Headers", "*");
         String option = req.getParameter("option");
         if (option.equals( "download")){
             String  pic_id = req.getParameter("pic_id");
