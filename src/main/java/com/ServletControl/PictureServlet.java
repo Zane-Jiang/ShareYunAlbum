@@ -113,6 +113,39 @@ public class PictureServlet extends HttpServlet {
                     respWriter.close();
                 }
                    break;
+
+                case "gitPictureInfo":{
+                    String pic_id=  req.getParameter("pic_id");
+                    System.out.println(pic_id);
+
+                    Picture picture = PictureManager.gitPictureInfoById(pic_id);
+                    JSONObject data = new JSONObject();
+                    data.put("option",option);
+                    if(picture == null){
+                        data.put("status","101");
+                    }else{
+                        data.put("status","100");
+                        data.put("pic_album",picture.getPic_album());
+                        data.put("pic_createtime",picture.getPic_uploadtime());
+                        data.put("pic_discription",picture.getPic_description());
+                    }
+                    respWriter.print(data);
+                    respWriter.close();
+                }break;
+
+                case "deletePicture":{
+                    String pic_id=  req.getParameter("pic_id");
+                    System.out.println(pic_id);
+                    JSONObject data = new JSONObject();
+                    data.put("option",option);
+                    if(PictureManager.deletePicture(pic_id)){
+                        data.put("status","100");
+                    }else {
+                        data.put("status","101");
+                    }
+                    respWriter.print(data);
+                    respWriter.close();
+                }break;
             }
         }
     }

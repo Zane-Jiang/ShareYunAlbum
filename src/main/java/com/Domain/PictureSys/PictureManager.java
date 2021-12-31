@@ -76,4 +76,34 @@ public class PictureManager {
         }
         return pic;
     }
+
+    public static Picture gitPictureInfoById(String pic_id) {
+        Connection connection = null;
+        PictureDAOImpl pictureDAO = new PictureDAOImpl();
+        Picture picture = null;
+        try {
+            connection = DBConnection.getConnection();
+           picture = pictureDAO.getPictureById(connection,pic_id);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }finally {
+            DBConnection.closeResource(connection,null );
+        }
+        return   picture;
+    }
+
+    public static boolean deletePicture(String pic_id) {
+        Connection connection = null;
+        boolean flag = true;
+        PictureDAOImpl pictureDAO = new PictureDAOImpl();
+        try {
+            connection = DBConnection.getConnection();
+            flag = pictureDAO.delete(connection,pic_id);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }finally {
+            DBConnection.closeResource(connection,null);
+        }
+        return  flag;
+    }
 }

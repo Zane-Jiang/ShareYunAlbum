@@ -28,4 +28,13 @@ public class PictureDAOImpl extends BaseDAO implements PictureDAO {
         String sql = "SELECT * FROM pic WHERE pic_id = ?";
         return  getInstance(conn,Picture.class,sql,pic_id);
     }
+
+    @Override
+    public boolean delete(Connection conn ,String pic_id) {
+        String sql = "DELETE FROM pic WHERE pic_id = ? ";
+        if(update(conn,sql,pic_id) == 1){
+            return true;
+        }
+        return false;
+    }
 }

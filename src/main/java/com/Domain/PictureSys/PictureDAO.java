@@ -9,4 +9,6 @@ public interface PictureDAO {
     List<Picture> getPictureByAlbum(Connection conn, String album_id);
     Picture getPictureById(Connection conn, String pic_id);
 
+
+    boolean delete(Connection conn, String pic_id);
 }

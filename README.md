@@ -32,4 +32,5 @@ ShareYunAlbum（显云相册）为 南京师范大学2019级软件工程 小组�
 
 
 
-#### 收获
+#### 日志
+2021.12.31 图片管理模块中增加了`gitPictureInfo`、`deletePicture`、`gitPictureIDByAlbum`接口
