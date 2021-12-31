@@ -19,6 +19,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.sql.Blob;
+import java.util.ArrayList;
 import java.util.List;
 
 @WebServlet(urlPatterns = "/pictureServlet")
@@ -44,14 +45,17 @@ public class PictureServlet extends HttpServlet {
             String pic_description= null;
             String option = null;
             InputStream pic_blob_stream = null;
+//            System.out.println("option  "+req.getParameter("option"));
             try {
                 List<FileItem>  list = servletFileUpload.parseRequest(req);
+
                 for (FileItem fileItem:list){
                     if(fileItem.isFormField()){
                         switch (fileItem.getFieldName()){
-                            case "option":option = fileItem.getString("UTF-8");break;
+                            case "option":option = fileItem.getString("UTF-8");System.out.println("option"+option);break;
                             case "pic_album":pic_album = fileItem.getString("UTF-8");break;
-                            case "pic_description":pic_description = fileItem.getString("UTF-8");break;
+                            case "pic_description":pic_description = fileItem.getString("UTF-8");System.out.println("pic_des"+pic_description);break;
+
                         }
                     }else{
                         if(fileItem.getFieldName().equals("pic_blob"));
@@ -100,16 +104,11 @@ public class PictureServlet extends HttpServlet {
                 case "getPictureID":{
                     String album_id=  req.getParameter("pic_album");
                     System.out.println(album_id);
-                    String []  picture_id = PictureManager.getPictureId(album_id);
-//                   for(String s:picture_id){
-//                       System.out.println(s);
-//                   }
-
+                    ArrayList<String> picture_id = PictureManager.getPictureId(album_id);
                    JSONObject data = new JSONObject();
                     data.put("option",option);
                     data.put("status","100");
                     data.put("pic_id",picture_id);
-
                     respWriter.print(data);
                     respWriter.close();
                 }
@@ -120,9 +119,9 @@ public class PictureServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.setContentType("text/json; charset=UTF-8");
+//        resp.setContentType("text/json; charset=UTF-8");
         resp.setHeader("Access-Control-Allow-Methods", "*");
-        ;
+        resp.setHeader("Content-Disposition", "attachment;fileName=1.png");
         resp.setHeader("Access-Control-Allow-Origin", "*"); //设置允许跨域访问
         resp.setHeader("Access-Control-Allow-Credentials", "true");
         resp.setHeader("Access-Control-Allow-Headers", "*");

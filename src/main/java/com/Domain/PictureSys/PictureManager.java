@@ -6,6 +6,7 @@ import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.sql.Connection;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -33,8 +34,9 @@ public class PictureManager {
     }
 
 
-    public static String[] getPictureId(String album_id){
-        String[] picture_id = null;
+    public static ArrayList<String> getPictureId(String album_id){
+        ArrayList<String> picture_id = new ArrayList<String>();
+//        String[] picture_id = null;
         Connection connection = null;
         PictureDAOImpl pictureDAO = new PictureDAOImpl();
 
@@ -43,7 +45,8 @@ public class PictureManager {
             List<Picture> List = pictureDAO.getPictureByAlbum(connection,album_id);
             int i =  0;
             for (Picture pic :List){
-                picture_id[i++] = pic.getPic_id();
+                System.out.println(pic.getPic_id());
+                picture_id.add(pic.getPic_id());
             }
 
         } catch (Exception e) {

@@ -7,7 +7,9 @@
 <body>
 
 <h1>uploadTest</h1>已测试
-<form action="http://81.68.146.156:8080/ShareYunAlbum/pictureServlet" method="post" enctype="multipart/form-data">
+<!--<form action="http://81.68.146.156:8080/ShareYunAlbum/pictureServlet" method="post" enctype="multipart/form-data">-->
+    <form action="http://localhost:8080/ShareYunAlbum/pictureServlet" method="post" enctype="multipart/form-data">
+
     option <input type="text" name="option" value="upload">
     pic_album<input type="text" name="pic_album" value="12345620211211143149"><br>
     pic_description<input type="text"name="pic_description" value="pripripripripri"><br>
@@ -17,6 +19,7 @@
 
 
 <h1>getIdByAlbumTest</h1>
+已测试
 <form action="http://localhost:8080/ShareYunAlbum/pictureServlet" method="post">
     option <input type="text" name="option" value="getPictureID">
     pic_album<input type="text" name="pic_album" value="12345620211211143149"><br>
@@ -25,8 +28,8 @@
 
 
 <h1>downloadTest</h1>已测试
-<form action="http://81.68.146.156:8080/ShareYunAlbum/pictureServlet" method="get">
-<!--<form action="http://localhost:8080/ShareYunAlbum/pictureServlet" method="get">-->
+<!--<form action="http://81.68.146.156:8080/ShareYunAlbum/pictureServlet" method="get">-->
+<form action="http://localhost:8080/ShareYunAlbum/pictureServlet" method="get">
     option <input type="text" name="option" value="download">
     pic_id<input type="text" name="pic_id" value="1234562021121114314920211214103205"><br>
     <input type="submit" value="下载">
