@@ -1,9 +1,29 @@
 package com.Domain.AdministratorSys;
 
+import com.ServiceUtils.DBConnection;
+
+import java.sql.Connection;
+
 public class AdministratorMagager {
 
-    public static boolean signInBypassword(String password){
-        return false;
+    public static String signInBypassword(String admin_id, String password){
+        Connection connection = null;
+        AdministratorDAOImpl administratorDAO = new AdministratorDAOImpl();
+        String status = null;
+        Administrator administrator = new Administrator();
+        try {
+            connection = DBConnection.getConnection();
+         if((administrator = administratorDAO.signIn(connection,admin_id)) != null){
+             status = administrator.getAdmin_authentication_string().equals(password)?"100":"102";
+            }else {
+                status = "101";
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }finally {
+            DBConnection.closeResource(connection,null);
+        }
+        return status;
     }
 
     public static boolean deleteUserById(){

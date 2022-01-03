@@ -1,95 +1,56 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html  class="x-admin-sm">
 <head>
-    <meta charset="UTF-8">
-    <title>显云相册-管理员系统</title>
-    <link type="text/css" rel="stylesheet" href="static/css/style.css" >
+	<meta charset="UTF-8">
+	<title>login</title>
+    <link rel="stylesheet" href="./css/login.css">
 </head>
 
-<body>
-<div id="login_header">
-    <img class="logo_img" alt="" src="static/img/logo.gif" >
-</div>
+<body class="login-bg">
+    <div class="login layui-anim layui-anim-up">
+        <div class="message">ShareYun Album Admin</div>
+        <div id="darkbannerwrap"></div>
+        <form method="post"  class="layui-form" >
+            <input name="username" placeholder="123456"  type="text" lay-verify="required" class="layui-input" >
+            <hr class="hr15">
+            <input name="password" lay-verify="required" placeholder="123456"  type="password" class="layui-input">
+            <hr class="hr15">
+            <input value="登录" lay-submit lay-filter="login" style="width:100%;" type="submit">
+            <hr class="hr20" >
+            <br>
+            测试页：
+            <a class="test" href="http://localhost:8080/ShareYunAlbum//pages/test/userTest.html">user test </a>
+            <br>
+            <a class="test" href="http://localhost:8080/ShareYunAlbum//pages/test/albumTest.html">album test </a>
+            <br>
+            <a class="test" href="http://localhost:8080/ShareYunAlbum//pages/test/pictureTest.html"> picture Test</a>
+            <br>
 
-
-<div class="login_banner">
-
-    <div id="l_content">
-        <span class="login_word">Welcome to ShareYunAlbum!</span>
+        </form>
     </div>
-
-    <div id="content">
-        <div class="login_form">
-            <div class="login_box">
-                <div class="tit">
-                    <h1>ShareYunAlbum  Administrator </h1>
-                </div>
+</body>
 
 
-                <div class="msg_cont">
-                    <b></b>
-                    <span class="errorMsg">请输入用户名和密码</span>
-                </div>
-
-
-                <br>
-
-                测试页：
-                <a class="test" href="http://localhost:8080/ShareYunAlbum//pages/test/userTest.html">user test </a>
-                <br>
-                <a class="test" href="http://localhost:8080/ShareYunAlbum//pages/test/albumTest.html">album test </a>
-                <br>
-                <a class="test" href="http://localhost:8080/ShareYunAlbum//pages/test/pictureTest.html"> picture Test</a>
-                <br>
-
-
-
-
-
-
-
-
-
-
-
-
-<!--                <div class="form">-->
-<!--                    <form action="http://localhost:8080/ShareYunAlbum/userServlet" method="post">-->
-<!--                        <label>用户名称：</label>-->
-<!--                        <input class="itxt" type="text" placeholder="请输入用户名" autocomplete="off" tabindex="1" name="userID" />-->
-<!--                        <br />-->
-<!--                        <br />-->
-<!--                        <label>用户密码：</label>-->
-<!--                        <input class="itxt" type="password" placeholder="请输入密码" autocomplete="off" tabindex="1" name="password" />-->
-<!--                        <br />-->
-<!--                        <br />-->
-<!--                        <input type="submit" value="登录" id="sub_btn" />-->
-<!--                    </form>-->
-<!--                </div>-->
-            </div>
-        </div>
-    </div>
-</div>
-<div id="bottom">
-			<span>
-				ShareYunAlbum.Copyright &copy;2021
-			</span>
-</div>
 
 <script type="text/javascript">
-    let baseUrl = "http://localhost:8080/ShareYunAlbum//pages/test/";
-    // let baseUrl = "http://81.68.146.156:8080/ShareYunAlbum//pages/test/";
-    let subUrls = [
-        "userTest.html", "albumTest.html","pictureTest.html"
+    window.onload=function () {
+
+        let ip1 = "localhost";
+        let ip2 = "81.68.146.156";
+        let baseUrl = "http://" + ip1 + ":8080/ShareYunAlbum//pages/test/";
+        let subUrls = [
+            "userTest.html", "albumTest.html", "pictureTest.html"
         ]
-    let $ = document.querySelectorAll.bind(document);
+        let $ = document.querySelectorAll.bind(document);
 
-    let classTests = $(".test");
-    for (let i = 0; i < classTests.length; i++) {
-        classTests[i].setAttribute("href", baseUrl + subUrls[i]);
+        let classTests = $(".test");
+        for (let i = 0; i < classTests.length; i++) {
+            classTests[i].setAttribute("href", baseUrl + subUrls[i]);
+        }
+        let forms = $("form")
+        for (let i = 0; i < forms.length; i++) {
+            forms[i].setAttribute("action", baseUrl + "administratorServlet");
+        }
     }
-
 </script>
-
-</body>
 </html>

@@ -20,6 +20,7 @@
     </form>
 
 <script type="text/javascript">
+    window.onload=function (){
     let baseUrl = "localhost";
     // let baseUrl = "81.68.146.156";
     let url = "http://" + baseUrl + ":8080/ShareYunAlbum/albumServlet"
@@ -27,7 +28,7 @@
     let forms = $("form");
     for (let i = 0; i < forms.length; i++) {
         forms[i].setAttribute("action", url);
-    }
+    }}
 
 </script>
 </body>

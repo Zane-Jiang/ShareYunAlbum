@@ -27,6 +27,12 @@
     </dependency>
 
     <dependency>
+      <groupId>joda-time</groupId>
+      <artifactId>joda-time</artifactId>
+      <version>2.9.8</version>
+    </dependency>
+
+    <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
       <version>4.10</version>
@@ -77,7 +83,15 @@
           <version>1.4</version>
       </dependency>
 
-      <!--    <dependency>-->
+<!--华为云内容审核-->
+    <dependency>
+      <groupId>com.huaweicloud.sdk</groupId>
+      <artifactId>huaweicloud-sdk-moderation</artifactId>
+      <version>3.0.55</version>
+    </dependency>
+
+
+    <!--    <dependency>-->
 <!--      <groupId>com.aliyun</groupId>-->
 <!--      <artifactId>aliyun-java-sdk-core</artifactId>-->
 <!--      <version>4.0.3</version>-->

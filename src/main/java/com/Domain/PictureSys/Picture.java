@@ -5,7 +5,7 @@ import java.util.Date;
 public class Picture {
     private  String pic_id;
     private String pic_album;
-    private  Date pic_uploadtime;
+    private Date pic_uploadtime;
     private String  pic_description;
 //    private Blob pic_blob;
 

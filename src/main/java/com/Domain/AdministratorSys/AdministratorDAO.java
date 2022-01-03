@@ -1,10 +1,10 @@
 package com.Domain.AdministratorSys;
 
-import com.Domain.UserSys.User;
-
 import java.sql.Connection;
 
 public  interface   AdministratorDAO {
 
-    User getAdministratorById(Connection conn , String id);
+//    获取所有用户phone
+
+    Administrator signIn(Connection connection, String admin_id);
 }

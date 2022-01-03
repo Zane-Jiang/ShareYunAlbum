@@ -114,7 +114,7 @@ public class PictureServlet extends HttpServlet {
                 }
                    break;
 
-                case "gitPictureInfo":{
+                case "getPictureInfo":{
                     String pic_id=  req.getParameter("pic_id");
                     System.out.println(pic_id);
 

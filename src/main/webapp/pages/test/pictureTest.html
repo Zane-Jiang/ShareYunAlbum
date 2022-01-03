@@ -48,12 +48,12 @@
 </form>
 
 
-<h1>gitPictureInfoTest</h1>
+<h1>getPictureInfoTest</h1>
 由于pic_id是系统从后台获取的，没有经过人工处理，所以这里必须正确，id错误也是返回101
 <br>
 已测试
 <form  method="post">
-    option <input type="text" name="option" value="gitPictureInfo">
+    option <input type="text" name="option" value="getPictureInfo">
     pic_id<input type="text" name="pic_id" value="1234562021121114314920211211192019"><br>
     <input type="submit" value="获取">
 </form>
@@ -69,6 +69,8 @@
 </form>
 
 <script type="text/javascript">
+window.onload=function()
+{
     let baseUrl = "localhost";
     // let baseUrl = "81.68.146.156";
     let url = "http://" + baseUrl + ":8080/ShareYunAlbum/pictureServlet"
@@ -77,6 +79,8 @@
     for (let i = 0; i < forms.length; i++) {
         forms[i].setAttribute("action", url);
     }
+}
+
 
 </script>
 

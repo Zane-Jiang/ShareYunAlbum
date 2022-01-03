@@ -20,7 +20,6 @@ public class UserServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/json; charset=UTF-8");
         resp.setHeader("Access-Control-Allow-Methods", "*");
-        ;
         resp.setHeader("Access-Control-Allow-Origin", "*"); //设置允许跨域访问
         resp.setHeader("Access-Control-Allow-Credentials", "true");
         resp.setHeader("Access-Control-Allow-Headers", "*");
