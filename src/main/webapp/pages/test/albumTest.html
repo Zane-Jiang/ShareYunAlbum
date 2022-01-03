@@ -5,7 +5,7 @@
     <title>albumTest</title>
 </head>
 <body>
-    <form action="http://localhost:8080/ShareYunAlbum/albumServlet" method="post">
+    <form method="post">
         option <input type="text" name="option" value="create">
         <br>
         album_name <input type="text" name="album_name" value="test Album">
@@ -19,5 +19,16 @@
         <input type="submit">
     </form>
 
+<script type="text/javascript">
+    let baseUrl = "localhost";
+    // let baseUrl = "81.68.146.156";
+    let url = "http://" + baseUrl + ":8080/ShareYunAlbum/albumServlet"
+    let $ = document.querySelectorAll.bind(document);
+    let forms = $("form");
+    for (let i = 0; i < forms.length; i++) {
+        forms[i].setAttribute("action", url);
+    }
+
+</script>
 </body>
 </html>

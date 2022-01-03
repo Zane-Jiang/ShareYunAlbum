@@ -1,7 +1,7 @@
 package com.Domain.UserSys;
 
 import com.ServiceUtils.DBConnection;
-import com.ServiceUtils.MessageService;
+import com.ServiceUtils.MessageService.MessageService;
 
 import java.sql.Connection;
 
@@ -102,7 +102,7 @@ public class UserManager {
                 if(userDAO.deleteUserByPhone(connection,phone)){
                     status = "100";
                 }
-            }else {
+            }else if(MessageService.getParams(phone).equals("unavailable")){
                 status = "101";
             }
         } catch (Exception e) {

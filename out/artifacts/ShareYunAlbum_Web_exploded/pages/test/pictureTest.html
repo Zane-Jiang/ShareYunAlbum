@@ -6,9 +6,22 @@
 </head>
 <body>
 
+<script type="text/javascript">
+    let baseUrl = "localhost";
+    // let baseUrl = "81.68.146.156";
+    let url = "http://" + baseUrl + ":8080/ShareYunAlbum/userServlet"
+    let $ = document.querySelectorAll.bind(document);
+    let forms = $("form");
+    for (let i = 0; i < forms.length; i++) {
+        forms[i].setAttribute("action", url);
+    }
+
+</script>
+
+
+
 <h1>uploadTest</h1>已测试
-<!--<form action="http://81.68.146.156:8080/ShareYunAlbum/pictureServlet" method="post" enctype="multipart/form-data">-->
-    <form action="http://localhost:8080/ShareYunAlbum/pictureServlet" method="post" enctype="multipart/form-data">
+    <form  method="post" enctype="multipart/form-data">
 
     option <input type="text" name="option" value="upload">
     pic_album<input type="text" name="pic_album" value="12345620211211143149"><br>
@@ -20,7 +33,7 @@
 
 <h1>getIdByAlbumTest</h1>
 已测试
-<form action="http://localhost:8080/ShareYunAlbum/pictureServlet" method="post">
+<form method="post">
     option <input type="text" name="option" value="getPictureID">
     pic_album<input type="text" name="pic_album" value="12345620211211143149"><br>
     <input type="submit" value="获取">
@@ -28,8 +41,7 @@
 
 
 <h1>downloadTest</h1>已测试
-<!--<form action="http://81.68.146.156:8080/ShareYunAlbum/pictureServlet" method="get">-->
-<form action="http://localhost:8080/ShareYunAlbum/pictureServlet" method="get">
+<form  method="get">
     option <input type="text" name="option" value="download">
     pic_id<input type="text" name="pic_id" value="1234562021121114314920211214103205"><br>
     <input type="submit" value="下载">
@@ -40,8 +52,7 @@
 由于pic_id是系统从后台获取的，没有经过人工处理，所以这里必须正确，id错误也是返回101
 <br>
 已测试
-<!--<form action="http://81.68.146.156:8080/ShareYunAlbum/pictureServlet" method="get">-->
-<form action="http://localhost:8080/ShareYunAlbum/pictureServlet" method="post">
+<form  method="post">
     option <input type="text" name="option" value="gitPictureInfo">
     pic_id<input type="text" name="pic_id" value="1234562021121114314920211211192019"><br>
     <input type="submit" value="获取">
@@ -51,12 +62,23 @@
 由于pic_id是系统从后台获取的，没有经过人工处理，所以这里必须正确，id错误也是返回101
 <br>
 已测试
-<!--<form action="http://81.68.146.156:8080/ShareYunAlbum/pictureServlet" method="get">-->
-<form action="http://localhost:8080/ShareYunAlbum/pictureServlet" method="post">
+<form method="post">
     option <input type="text" name="option" value="deletePicture">
     pic_id<input type="text" name="pic_id" value="1234562021121114314920211211192019"><br>
     <input type="submit" value="删除">
 </form>
+
+<script type="text/javascript">
+    let baseUrl = "localhost";
+    // let baseUrl = "81.68.146.156";
+    let url = "http://" + baseUrl + ":8080/ShareYunAlbum/pictureServlet"
+    let $ = document.querySelectorAll.bind(document);
+    let forms = $("form");
+    for (let i = 0; i < forms.length; i++) {
+        forms[i].setAttribute("action", url);
+    }
+
+</script>
 
 </body>
 </html>
