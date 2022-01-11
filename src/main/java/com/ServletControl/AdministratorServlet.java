@@ -57,8 +57,6 @@ public class AdministratorServlet extends HttpServlet {
 
             }
             break;
-
-
             case "showAllUser": {
                 System.out.println("showAllUser");
                 JSONObject date = new JSONObject();
@@ -84,10 +82,6 @@ public class AdministratorServlet extends HttpServlet {
                 System.out.println("deleteUser");
                 JSONObject date = new JSONObject();
 //                不考虑并发问题，比如，之前是有的，但是某一瞬间用户删掉了，这是会造成系统崩溃
-
-
-
-
                 if (UserManager.deleteUserByPhoneWithoutCode(phone))
                     date.put("status", "100");
                 else
@@ -100,7 +94,7 @@ public class AdministratorServlet extends HttpServlet {
             case "getAllPictureId": {
                 System.out.println("getAllPicture");
                 JSONObject date = new JSONObject();
-                date.put("userPhones", PictureManager.getAllPicture());
+                date.put("getAllPictureId", PictureManager.getAllPicture());
                 respWriter.print(date);
                 respWriter.close();
             }
@@ -108,8 +102,9 @@ public class AdministratorServlet extends HttpServlet {
 
             case "getPictureInfo": {
                 System.out.println("getPictureInfo");
+                String pic_id = req.getParameter("pic_id");
                 JSONObject date = new JSONObject();
-                date.put("userPhones", PictureManager.getAllPicture());
+                date.put("userPhones", PictureManager.gitPictureInfoById(pic_id));
                 respWriter.print(date);
                 respWriter.close();
             }
@@ -119,11 +114,6 @@ public class AdministratorServlet extends HttpServlet {
                 String pic_id = req.getParameter("pic_id");
                 respWriter.print(AdministratorMagager.autoReviewPicture(pic_id));
                 respWriter.close();
-            }
-            break;
-
-            case "download": {
-
             }
             break;
             case "deletePicture": {

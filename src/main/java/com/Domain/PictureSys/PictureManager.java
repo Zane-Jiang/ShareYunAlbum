@@ -14,27 +14,27 @@ public class PictureManager {
     public static Picture upload(String pic_album, String pic_description, byte[] pic_blob) {
         Date pic_createtime = new Date();
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
-        String pic_id = pic_album+simpleDateFormat.format(pic_createtime);
-        Picture picture = new Picture(pic_id,pic_album,pic_createtime,pic_description,pic_blob);
+        String pic_id = pic_album + simpleDateFormat.format(pic_createtime);
+        Picture picture = new Picture(pic_id, pic_album, pic_createtime, pic_description, pic_blob);
 
         Connection connection = null;
         PictureDAOImpl pictureDAO = new PictureDAOImpl();
 
         try {
             connection = DBConnection.getConnection();
-            if(pictureDAO.createPictrue(connection,picture)){
+            if (pictureDAO.createPictrue(connection, picture)) {
                 picture.setStatus("100");
             }
         } catch (Exception e) {
             e.printStackTrace();
-        }finally {
-            DBConnection.closeResource(connection,null);
+        } finally {
+            DBConnection.closeResource(connection, null);
         }
-        return  picture;
+        return picture;
     }
 
 
-    public static ArrayList<String> getPictureId(String album_id){
+    public static ArrayList<String> getPictureId(String album_id) {
         ArrayList<String> picture_id = new ArrayList<String>();
 //        String[] picture_id = null;
         Connection connection = null;
@@ -42,19 +42,19 @@ public class PictureManager {
 
         try {
             connection = DBConnection.getConnection();
-            List<Picture> List = pictureDAO.getPictureByAlbum(connection,album_id);
-            int i =  0;
-            for (Picture pic :List){
+            List<Picture> List = pictureDAO.getPictureByAlbum(connection, album_id);
+            int i = 0;
+            for (Picture pic : List) {
                 System.out.println(pic.getPic_id());
                 picture_id.add(pic.getPic_id());
             }
 
         } catch (Exception e) {
             e.printStackTrace();
-        }finally {
-            DBConnection.closeResource(connection,null);
+        } finally {
+            DBConnection.closeResource(connection, null);
         }
-        return  picture_id;
+        return picture_id;
     }
 
     public static InputStream download(String pic_id) {
@@ -64,15 +64,14 @@ public class PictureManager {
 
         try {
             connection = DBConnection.getConnection();
-            Picture picture = pictureDAO.getPictureById(connection,pic_id);
-            if(picture.getPic_blob() != null)
+            Picture picture = pictureDAO.getPictureById(connection, pic_id);
+            if (picture.getPic_blob() != null)
                 pic = new ByteArrayInputStream(picture.getPic_blob());
 //            System.out.println(" =========pic Stream "+new String(String.valueOf(pic)));
         } catch (Exception e) {
             e.printStackTrace();
-        }
-        finally {
-            DBConnection.closeResource(connection,null);
+        } finally {
+            DBConnection.closeResource(connection, null);
         }
         return pic;
     }
@@ -83,13 +82,13 @@ public class PictureManager {
         Picture picture = null;
         try {
             connection = DBConnection.getConnection();
-           picture = pictureDAO.getPictureById(connection,pic_id);
+            picture = pictureDAO.getPictureById(connection, pic_id);
         } catch (Exception e) {
             e.printStackTrace();
-        }finally {
-            DBConnection.closeResource(connection,null );
+        } finally {
+            DBConnection.closeResource(connection, null);
         }
-        return   picture;
+        return picture;
     }
 
     public static boolean deletePicture(String pic_id) {
@@ -98,47 +97,50 @@ public class PictureManager {
         PictureDAOImpl pictureDAO = new PictureDAOImpl();
         try {
             connection = DBConnection.getConnection();
-            flag = pictureDAO.delete(connection,pic_id);
+            flag = pictureDAO.delete(connection, pic_id);
         } catch (Exception e) {
             e.printStackTrace();
-        }finally {
-            DBConnection.closeResource(connection,null);
+        } finally {
+            DBConnection.closeResource(connection, null);
         }
-        return  flag;
+        return flag;
     }
 
     public static String getPicteureSum() {
         Connection connection = null;
-        Long sum  = null;
+        Long sum = null;
         PictureDAOImpl pictureDAO = new PictureDAOImpl();
         try {
             connection = DBConnection.getConnection();
-           sum =  pictureDAO.getSum(connection);
+            sum = pictureDAO.getSum(connection);
         } catch (Exception e) {
             e.printStackTrace();
-        }finally {
-            DBConnection.closeResource(connection,null);
+        } finally {
+            DBConnection.closeResource(connection, null);
         }
         return Long.toString(sum);
     }
 
     public static ArrayList<String> getAllPicture() {
+        ArrayList<String> picture_id = new ArrayList<String>();
+//        String[] picture_id = null;
         Connection connection = null;
         PictureDAOImpl pictureDAO = new PictureDAOImpl();
-        ArrayList<String> picIdList = null;
-        List<Picture> piclist = null;
+
         try {
             connection = DBConnection.getConnection();
-            piclist =  pictureDAO.getAllPicture(connection);
-            for(Picture picture : piclist){
-                System.out.println(picture.getPic_id()+"  "+picture.getPic_description());
-                picIdList.add(picture.getPic_id());
+            List<Picture> List = pictureDAO.getAllPicture(connection);
+            int i = 0;
+            for (Picture pic : List) {
+                System.out.println(pic.getPic_id());
+                picture_id.add(pic.getPic_id());
             }
+
         } catch (Exception e) {
             e.printStackTrace();
-        }finally {
-            DBConnection.closeResource(connection,null);
+        } finally {
+            DBConnection.closeResource(connection, null);
         }
-        return picIdList;
+        return picture_id;
     }
 }
