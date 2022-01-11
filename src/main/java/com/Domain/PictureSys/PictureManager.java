@@ -106,4 +106,39 @@ public class PictureManager {
         }
         return  flag;
     }
+
+    public static String getPicteureSum() {
+        Connection connection = null;
+        Long sum  = null;
+        PictureDAOImpl pictureDAO = new PictureDAOImpl();
+        try {
+            connection = DBConnection.getConnection();
+           sum =  pictureDAO.getSum(connection);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }finally {
+            DBConnection.closeResource(connection,null);
+        }
+        return Long.toString(sum);
+    }
+
+    public static ArrayList<String> getAllPicture() {
+        Connection connection = null;
+        PictureDAOImpl pictureDAO = new PictureDAOImpl();
+        ArrayList<String> picIdList = null;
+        List<Picture> piclist = null;
+        try {
+            connection = DBConnection.getConnection();
+            piclist =  pictureDAO.getAllPicture(connection);
+            for(Picture picture : piclist){
+                System.out.println(picture.getPic_id()+"  "+picture.getPic_description());
+                picIdList.add(picture.getPic_id());
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }finally {
+            DBConnection.closeResource(connection,null);
+        }
+        return picIdList;
+    }
 }

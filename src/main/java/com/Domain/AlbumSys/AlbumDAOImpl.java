@@ -26,9 +26,14 @@ public class AlbumDAOImpl extends BaseDAO implements AlbumDAO  {
         }
         return false;
     }
-
+    @Override
     public List<Album> getAlbumByUserId(Connection conn, String user_id){
         String sql = "SELECT * FROM album WHERE album_owner = ?";
         return getForList(conn, Album.class,sql,user_id);
+    }
+    @Override
+    public Long getSum(Connection connection){
+        String sql = "select count(album_id) from  album ";
+        return getValue(connection,sql);
     }
 }

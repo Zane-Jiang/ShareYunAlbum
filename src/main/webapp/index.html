@@ -1,56 +1,100 @@
 <!doctype html>
-<html  class="x-admin-sm">
+<html class="x-admin-sm">
 <head>
-	<meta charset="UTF-8">
-	<title>login</title>
+    <meta charset="UTF-8">
+    <title>login</title>
     <link rel="stylesheet" href="./css/login.css">
 </head>
 
-<body class="login-bg">
-    <div class="login layui-anim layui-anim-up">
-        <div class="message">ShareYun Album Admin</div>
-        <div id="darkbannerwrap"></div>
-        <form method="post"  class="layui-form" >
-            <input name="username" placeholder="123456"  type="text" lay-verify="required" class="layui-input" >
-            <hr class="hr15">
-            <input name="password" lay-verify="required" placeholder="123456"  type="password" class="layui-input">
-            <hr class="hr15">
-            <input value="登录" lay-submit lay-filter="login" style="width:100%;" type="submit">
-            <hr class="hr20" >
-            <br>
-            测试页：
-            <a class="test" href="http://localhost:8080/ShareYunAlbum//pages/test/userTest.html">user test </a>
-            <br>
-            <a class="test" href="http://localhost:8080/ShareYunAlbum//pages/test/albumTest.html">album test </a>
-            <br>
-            <a class="test" href="http://localhost:8080/ShareYunAlbum//pages/test/pictureTest.html"> picture Test</a>
-            <br>
+<link rel="stylesheet" href="./lib/layui/css/layui.css" type="text/css" charset="UTF-8"/>
 
-        </form>
-    </div>
+<script src="https://libs.baidu.com/jquery/2.1.4/jquery.min.js" charset="UTF-8"></script>
+<script src="./lib/layui/layui.all.js" charset="UTF-8"></script>
+
+<body class="login-bg">
+<div class="login layui-anim layui-anim-up">
+    <div class="message">ShareYun Album Admin</div>
+    <div id="darkbannerwrap"></div>
+    <form class="layui-form" style="margin-top:20px" method="post">
+                <br>
+                账号<input value="123456" name="admin_id" id="admin_idId" placeholder="123456" type="text" lay-verify="required" class="layui-input">
+                    <br>
+                密码<input value="123456"  name="password" id="passwordId" lay-verify="required" placeholder="123456" type="password" class="layui-input ">
+
+        <button type = "submit" id="btn_signIn"  style = "width:100%"class="layui-btn layui-btn-lg layui-btn-primary layui-btn-radius">登录</button>
+        测试页：
+        <a class="test" href="http://localhost:8080/ShareYunAlbum//pages/test/userTest.html">user test </a>
+        <br>
+        <a class="test" href="http://localhost:8080/ShareYunAlbum//pages/test/albumTest.html">album test </a>
+        <br>
+        <a class="test" href="http://localhost:8080/ShareYunAlbum//pages/test/pictureTest.html"> picture Test</a>
+        <br>
+        <a class="test" href="http://localhost:8080/ShareYunAlbum//pages/test/administrator.html"> administrator Test</a>
+    </form>
+
+</div>
 </body>
 
 
-
-<script type="text/javascript">
-    window.onload=function () {
-
-        let ip1 = "localhost";
-        let ip2 = "81.68.146.156";
-        let baseUrl = "http://" + ip1 + ":8080/ShareYunAlbum//pages/test/";
-        let subUrls = [
-            "userTest.html", "albumTest.html", "pictureTest.html"
-        ]
-        let $ = document.querySelectorAll.bind(document);
-
-        let classTests = $(".test");
-        for (let i = 0; i < classTests.length; i++) {
-            classTests[i].setAttribute("href", baseUrl + subUrls[i]);
+<!--<script type="text/javascript">-->
+<!--    window.onload = function () {-->
+<!--        let ip1 = "localhost";-->
+<!--        let ip2 = "81.68.146.156";-->
+<!--        let baseUrl = "http://" + ip1 + ":8080/ShareYunAlbum/pages/test/";-->
+<!--        let subUrls = [-->
+<!--            "userTest.html", "albumTest.html", "pictureTest.html","administratorTest.html"-->
+<!--        ]-->
+<!--        let $ = document.querySelectorAll.bind(document);-->
+<!--        let classTests = $(".test");-->
+<!--        for (let i = 0; i < classTests.length; i++) {-->
+<!--            classTests[i].setAttribute("href", baseUrl + subUrls[i]);-->
+<!--        }-->
+<!--    }-->
+<!--</script>-->
+<script type="text/javascript" >
+    $("#btn_signIn").click(function () {
+        let admin_id = $("#admin_idId").val().trim();
+        let password = $("#passwordId").val().trim();;
+        if (admin_id === "" || password === "" || password === undefined || admin_id === undefined) {
+            alert("请输入账号或密码"+admin_id + " "+ password);
+            console.log("aaaa");
+            return;
         }
-        let forms = $("form")
-        for (let i = 0; i < forms.length; i++) {
-            forms[i].setAttribute("action", baseUrl + "administratorServlet");
-        }
-    }
+        console.log("ewfergvrevervbe")
+        let option = "signIn";
+        let InfOut = {
+            "admin_id": admin_id,
+            "password": password,
+            "option": option
+        };
+
+        $.ajax({
+            type: "post",
+            url: "http://localhost:8080/ShareYunAlbum/administratorServlet",
+            data: InfOut,
+            dataType: "json",
+            success: function (result) {
+                console.log(result.data);
+                alert("成功了");
+                if (result.status.toString() == "100") {
+                    window.location.href = "./pages/administrator/home.html";
+                    alert("成功");
+                } else {
+                    layer.open({
+                        title: '登录失败',
+                        content: '请检查用户名和密码',
+                        shade: 0.5,
+                        yes: function(){
+                            layer.closeAll();
+                        }
+                    });
+                }
+            },
+            error: function () {
+                alert("登录发生异常");
+            }
+
+        })
+    })
 </script>
 </html>

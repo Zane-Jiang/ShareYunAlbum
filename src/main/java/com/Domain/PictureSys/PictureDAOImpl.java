@@ -37,4 +37,15 @@ public class PictureDAOImpl extends BaseDAO implements PictureDAO {
         }
         return false;
     }
+    @Override
+    public Long getSum(Connection connection){
+        String sql = "select count(pic_id) from  pic ";
+        return getValue(connection,sql);
+    }
+
+    @Override
+    public List<Picture> getAllPicture(Connection connection){
+        String sql = "select * from  pic";
+        return getForList(connection,Picture.class,sql);
+    }
 }

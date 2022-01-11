@@ -4,6 +4,8 @@ import com.ServiceUtils.DBConnection;
 import com.ServiceUtils.MessageService.MessageService;
 
 import java.sql.Connection;
+import java.util.ArrayList;
+import java.util.List;
 
 public class UserManager {
     public static String modifyUserPublicInfo(String userPhone, String userName, String userDesc, String userSex) {
@@ -112,6 +114,59 @@ public class UserManager {
         }
         return status;
 
+
+    }
+
+    public static String getUserSum() {
+        Connection connection = null;
+       Long sum = null;
+        UserDAOImpl userDAO = new UserDAOImpl();
+        try {
+            connection = DBConnection.getConnection();
+            sum =  userDAO.getSum(connection);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }finally {
+            DBConnection.closeResource(connection,null);
+        }
+        return String.valueOf(sum);
+    }
+
+
+    public static ArrayList<String> getUserPhones() {
+        ArrayList<String> phone = new ArrayList<String>();
+        Connection connection = null;
+        UserDAOImpl userDAO = new UserDAOImpl();
+
+        try {
+            connection = DBConnection.getConnection();
+            List<User> List = userDAO.getAllPhone(connection);
+            int i =  0;
+            for (User user :List){
+                System.out.println(user.getUser_phone());
+                phone.add(user.getUser_phone());
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }finally {
+            DBConnection.closeResource(connection,null);
+        }
+        return  phone;
+    }
+
+    public static boolean deleteUserByPhoneWithoutCode(String phone) {
+        System.out.println("delete : "+phone);
+        Connection connection = null;
+        UserDAOImpl userDAO = new UserDAOImpl();
+        boolean flag = false;
+        try {
+            connection = DBConnection.getConnection();
+            flag  = userDAO.deleteUserByPhone(connection,phone);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return flag;
 
     }
 }

@@ -2,12 +2,16 @@ package com.Domain.UserSys;
 import com.ServiceUtils.BaseDAO;
 
 import java.sql.Connection;
+import java.util.List;
 
 public class UserDAOImpl extends BaseDAO implements UserDAO  {
     //这里要先写extends 后写implements
 
-
-
+    @Override
+    public List<User> getAllPhone(Connection conn) {
+        String sql = "SELECT * FROM user " ;
+        return getForList(conn,User.class,sql);
+    }
 
     @Override
     public User getUserByPhone(Connection conn, String phone) {
@@ -47,10 +51,17 @@ public class UserDAOImpl extends BaseDAO implements UserDAO  {
     public boolean deleteUserByPhone(Connection conn, String user_phone) {
         String sql = "DELETE FROM user WHERE user_phone = ? ";
         if(update(conn,sql,user_phone) == 1){
+            System.out.println("impl 删除成功");
             return true;
+
         }
         return false;
     }
 
+    @Override
+    public Long getSum(Connection connection){
+        String sql = "select count(user_phone) from  user ";
+        return getValue(connection,sql);
+    }
 
 }

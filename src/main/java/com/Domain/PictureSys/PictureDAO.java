@@ -11,4 +11,8 @@ public interface PictureDAO {
 
 
     boolean delete(Connection conn, String pic_id);
+
+    Long getSum(Connection connection);
+
+    List<Picture> getAllPicture(Connection connection);
 }

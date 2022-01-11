@@ -1,7 +1,13 @@
 package com.Domain.AdministratorSys;
 
+import com.Domain.PictureSys.PictureManager;
+import com.ServiceUtils.ContentReview.PictureReview;
 import com.ServiceUtils.DBConnection;
+import com.alibaba.fastjson.JSONObject;
+import org.apache.commons.io.IOUtils;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.sql.Connection;
 
 public class AdministratorMagager {
@@ -49,4 +55,15 @@ public class AdministratorMagager {
     }
 
 
+    public static JSONObject autoReviewPicture(String pic_id) {
+        JSONObject date = null;
+        InputStream pic = PictureManager.download(pic_id);
+        try {
+            byte[] picByte = IOUtils.toByteArray(pic);
+           date = (JSONObject) PictureReview.Review(picByte);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return date;
+    }
 }

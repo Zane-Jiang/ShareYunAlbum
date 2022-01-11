@@ -76,4 +76,19 @@ public class AlbumManager {
         }
         return  album_id;
     }
+
+    public static String  getAlbumSum() {
+        Connection connection = null;
+        Long sum = null;
+        AlbumDAOImpl albumDAO = new AlbumDAOImpl();
+        try {
+            connection = DBConnection.getConnection();
+            sum =  albumDAO.getSum(connection);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }finally {
+            DBConnection.closeResource(connection,null);
+        }
+        return Long.toString(sum);
+    }
 }
