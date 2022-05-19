@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>albumTest</title>
+</head>
+<body>
+    <form method="post">
+        option <input type="text" name="option" value="create">
+        <br>
+        album_name <input type="text" name="album_name" value="test Album">
+        <br>
+        album_owner <input type="text" name="album_owner" value="123456">
+        <br>
+        album_description <input type="text" name="album_description" value="tets album_description">
+        <br>
+        album_public <input  type="text" name="album_public" value="pri">
+        <br>
+        album_id <input  type="text" name="album_id" value="111">
+        <br>
+        user_phone <input type="text" name="user_phone" value="15061110469">
+        <input type="submit">
+    </form>
+
+<script type="text/javascript">
+    window.onload=function (){
+    let baseUrl = "localhost";
+    // let baseUrl = "81.68.146.156";
+    let url = "http://" + baseUrl + ":8080/ShareYunAlbum/albumServlet"
+    let $ = document.querySelectorAll.bind(document);
+    let forms = $("form");
+    for (let i = 0; i < forms.length; i++) {
+        forms[i].setAttribute("action", url);
+    }}
+
+</script>
+</body>
+</html>

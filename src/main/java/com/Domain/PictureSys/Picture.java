@@ -66,4 +66,5 @@ public class Picture {
     public byte[] getPic_blob() {
         return pic_blob;
     }
+
 }

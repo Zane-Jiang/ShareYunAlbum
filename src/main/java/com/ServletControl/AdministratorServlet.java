@@ -104,7 +104,7 @@ public class AdministratorServlet extends HttpServlet {
                 System.out.println("getPictureInfo");
                 String pic_id = req.getParameter("pic_id");
                 JSONObject date = new JSONObject();
-                date.put("userPhones", PictureManager.gitPictureInfoById(pic_id));
+                date.put("Picture", PictureManager.gitPictureInfoById(pic_id));
                 respWriter.print(date);
                 respWriter.close();
             }

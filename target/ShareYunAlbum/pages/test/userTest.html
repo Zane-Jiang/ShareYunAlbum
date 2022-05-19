@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>userTest</title>
+</head>
+<body>
+
+
+<h1>sendMessage</h1>
+    已测试
+<form  method="post" >
+
+    option <input type="text" name="option" value="sendMessage">
+    <br>
+    phone<input type="text"name="phone" value="18550626563"><br>
+
+    <input type="submit" value="发送">
+</form>
+
+
+
+
+
+<h1>modifyInfo</h1>已测试
+<form method="post">
+    option <input type="text" name="option" value="modifyInfo"><br>
+    user_phone<input type="text" name="user_phone" value="18550626563"><br>
+    user_name <input type="text" name="user_name" value="newName"><br>
+    user_description <input type="text" name="user_description" value="modify description"><br>
+    user_sex <input type="text" name="user_sex" value="women"><br>
+    <input type="submit" value="修改">
+</form>
+
+
+
+<h1>checkCodeTest</h1>已测试
+<form method="post">
+
+    option <input type="text" name="option" value="checkAutoCode">
+    <br>
+    type<input type="text" name="type" value="signUp">
+    <br>
+    phone<input type="text" name="phone" value="18550626563">
+    <br>
+    autuCode <input type="text" name="autoCode" value="784265">
+    <br>
+    <input type="submit" value="验证">
+</form>
+
+<h1>checkCodeTest</h1>已测试
+<form  method="post">
+
+    option <input type="text" name="option" value="checkAutoCode">
+    <br>
+    type<input type="text" name="type" value="signIn">
+    <br>
+    phone<input type="text" name="phone" value="18550626563">
+    <br>
+    autuCode <input type="text" name="autoCode" value="784265">
+    <br>
+    <input type="submit" value="验证">
+</form>
+
+
+
+
+</body>
+<script type="text/javascript">
+    window.onload=function (){
+    let baseUrl = "localhost";
+    // let baseUrl = "81.68.146.156";
+    let url = "http://" + baseUrl + ":8080/ShareYunAlbum/userServlet"
+    let $ = document.querySelectorAll.bind(document);
+    let forms = $("form");
+    for (let i = 0; i < forms.length; i++) {
+        forms[i].setAttribute("action", url);
+    }
+    }
+
+</script>
+</html>

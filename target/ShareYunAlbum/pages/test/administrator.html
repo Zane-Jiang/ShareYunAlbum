@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>userTest</title>
+</head>
+<body>
+
+<h1>signInTest</h1>
+<form method="post">
+    option <input type="text" name="option" value="signIn">
+    <br>
+    admin_id<input type="text" name="admin_id" value="123456">
+    <br>
+    password<input type="text" name="password" value="123456">
+
+    <input type="submit" value="验证">
+</form>
+
+<h1>showSum</h1>已测试
+<form  method="post">
+    <input type="text" name="option" value="showSum">
+    <input type="submit" value="展示">
+</form>
+
+<h1>showAllUser</h1>已测试
+<form  method="post">
+    <input type="text" name="option" value="showAllUser">
+    <input type="submit" value="展示">
+</form>
+
+<h1>deleteUser</h1>测试
+<form method="post">
+    option <input type="text" name="option" value="deleteUser"><br>
+    phone<input type="text" name="phone" value="18550626563"><br>
+    <input type="submit" value="删除">
+</form>
+
+<h1>autoReview</h1>yi测试
+<form method="post">
+    option <input type="text" name="option" value="autoReviewPicture"><br>
+    phone<input type="text" name="pic_id" value="1234562021121114314920220103191629"><br>
+    <input type="submit" value="审核">
+</form>
+
+<h1>getUserInfo</h1>已测试
+<form method="post">
+    option <input type="text" name="option" value="getUserInfo"><br>
+    phone<input type="text" name="phone" value="18550626563"><br>
+    <input type="submit" value="获取">
+</form>
+
+
+<h1>autoReview</h1>已测试
+<form method="post">
+    option <input type="text" name="option" value="autoReviewPicture"><br>
+    phone<input type="text" name="pic_id" value="1234562021121114314920220103191629"><br>
+    <input type="submit" value="审核">
+</form>
+
+<h1>getAllPictureId</h1>测试
+<form method="post">
+    option <input type="text" name="option" value="getAllPictureId"><br>
+    <input type="submit" value="获取">
+</form>
+
+
+<h1>getPictureInfoTest</h1>
+<br>
+已测试
+<form  method="post">
+    option <input type="text" name="option" value="getPictureInfo">
+    pic_id<input type="text" name="pic_id" value="1234562021121114314920211211192019"><br>
+    <input type="submit" value="获取">
+</form>
+
+<h1>downloadTest</h1>已测试
+<form  method="get">
+    option <input type="text" name="option" value="download">
+    pic_id<input type="text" name="pic_id" value="1234562021121114314920211214103205"><br>
+    <input type="submit" value="下载">
+</form>
+
+</body>
+<script type="text/javascript">
+    window.onload=function (){
+        let baseUrl = "localhost";
+        // let baseUrl = "81.68.146.156";
+        let url = "http://" + baseUrl + ":8080/ShareYunAlbum/administratorServlet"
+        let $ = document.querySelectorAll.bind(document);
+        let forms = $("form");
+        for (let i = 0; i < forms.length; i++) {
+            forms[i].setAttribute("action", url);
+        }
+    }
+
+</script>
+</html>

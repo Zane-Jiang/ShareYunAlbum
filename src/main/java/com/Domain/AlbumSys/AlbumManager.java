@@ -31,6 +31,20 @@ public class AlbumManager {
     return album;
     }
 
+    public static String  getAlbumSum() {
+        Connection connection = null;
+        Long sum = null;
+        AlbumDAOImpl albumDAO = new AlbumDAOImpl();
+        try {
+            connection = DBConnection.getConnection();
+            sum =  albumDAO.getSum(connection);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }finally {
+            DBConnection.closeResource(connection,null);
+        }
+        return Long.toString(sum);
+    }
 
     public static boolean deleteAlbum(String album_id)
     {
@@ -57,38 +71,53 @@ public class AlbumManager {
         return album_owner+simpleDateFormat.format(album_createtime);
     }
 
-    public static String[] getAlbumId(String user_id) {
+    public static List<Album> getAlbumIdByUserID(String user_id) {
         Connection connection = null;
         AlbumDAOImpl albumDAO = new AlbumDAOImpl();
-        String [] album_id = null;
+        List<Album> list=null;
         try {
             connection = DBConnection.getConnection();
-            List<Album> list = albumDAO.getAlbumByUserId(connection,user_id);
-            int i = 0 ;
-            for(Album album:list){
-                album_id[i++] = album.getAlbum_id();
-            }
+            list = albumDAO.getAlbumByUserId(connection,user_id);
         }catch (Exception e)
         {
             e.printStackTrace();
         }finally {
             DBConnection.closeResource(connection,null);
         }
-        return  album_id;
+        return list;
     }
 
-    public static String  getAlbumSum() {
+    public static Album getAlbumById(String album_id)
+    {
         Connection connection = null;
-        Long sum = null;
         AlbumDAOImpl albumDAO = new AlbumDAOImpl();
-        try {
-            connection = DBConnection.getConnection();
-            sum =  albumDAO.getSum(connection);
-        } catch (Exception e) {
+        Album album = null;
+        try{
+            connection=DBConnection.getConnection();
+            album=albumDAO.getAlbumById(connection,album_id);
+        }catch (Exception e)
+        {
             e.printStackTrace();
         }finally {
             DBConnection.closeResource(connection,null);
         }
-        return Long.toString(sum);
+        return album;
+    }
+
+    public static Boolean modifyAlbum(String album_id,String album_name, String album_description, String album_public)
+    {
+        Connection connection = null;
+        AlbumDAOImpl albumDAO = new AlbumDAOImpl();
+        boolean ret=false;
+        try{
+            connection=DBConnection.getConnection();
+            ret=albumDAO.modifyAlbum(connection,album_id,album_name,album_description,album_public);
+        }catch (Exception e)
+        {
+            e.printStackTrace();
+        }finally {
+            DBConnection.closeResource(connection,null);
+        }
+        return ret;
     }
 }

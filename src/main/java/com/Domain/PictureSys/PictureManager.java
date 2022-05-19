@@ -22,7 +22,7 @@ public class PictureManager {
 
         try {
             connection = DBConnection.getConnection();
-            if (pictureDAO.createPictrue(connection, picture)) {
+            if (pictureDAO.createPicture(connection, picture)) {
                 picture.setStatus("100");
             }
         } catch (Exception e) {
@@ -142,5 +142,22 @@ public class PictureManager {
             DBConnection.closeResource(connection, null);
         }
         return picture_id;
+    }
+
+    public static String getPic_user(String pic_id)
+    {
+        String user_id=null;
+        Connection connection = null;
+        PictureDAOImpl pictureDAO = new PictureDAOImpl();
+
+        try{
+            connection = DBConnection.getConnection();
+            user_id=pictureDAO.getUserIdByPicId(connection,pic_id);
+        }catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            DBConnection.closeResource(connection, null);
+        }
+        return user_id;
     }
 }

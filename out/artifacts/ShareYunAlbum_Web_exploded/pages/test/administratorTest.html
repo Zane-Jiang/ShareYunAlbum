@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>userTest</title>
+</head>
+<body>
+
+<h1>signInTest</h1>
+<form method="post">
+
+    option <input type="text" name="option" value="signIn">
+    <br>
+    type<input type="text" name="type" value="signUp">
+    <br>
+    phone<input type="text" name="phone" value="18550626563">
+    <br>
+    autuCode <input type="text" name="autoCode" value="784265">
+    <br>
+    <input type="submit" value="验证">
+</form>
+
+<h1>showSum</h1>已测试
+<form  method="post">
+    <input type="text" name="option" value="showSum">
+    <input type="submit" value="展示">
+</form>
+
+
+
+
+</body>
+<script type="text/javascript">
+    window.onload=function (){
+
+        let baseUrl = "localhost";
+        // let baseUrl = "81.68.146.156";
+        let url = "http://" + baseUrl + ":8080/ShareYunAlbum/administratorServlet"
+        let $ = document.querySelectorAll.bind(document);
+        let forms = $("form");
+        for (let i = 0; i < forms.length; i++) {
+            forms[i].setAttribute("action", url);
+        }
+    }
+
+</script>
+</html>

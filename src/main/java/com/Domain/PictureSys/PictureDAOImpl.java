@@ -1,5 +1,6 @@
 package com.Domain.PictureSys;
 
+import com.Domain.AlbumSys.Album;
 import com.ServiceUtils.BaseDAO;
 
 import java.sql.Connection;
@@ -8,7 +9,7 @@ import java.util.List;
 public class PictureDAOImpl extends BaseDAO implements PictureDAO {
 
     @Override
-    public boolean createPictrue(Connection connection, Picture picture) {
+    public boolean createPicture(Connection connection, Picture picture) {
         String sql = "INSERT INTO pic (pic_id, pic_album, pic_uploadtime, pic_description, pic_blob) VALUES (?, ?, ?, ?, ?)";
         if(update(connection,sql,picture.getPic_id(),picture.getPic_album(),picture.getPic_uploadtime(), picture.getPic_description(),picture.getPic_blob()) == 1){
             return true;
@@ -32,6 +33,8 @@ public class PictureDAOImpl extends BaseDAO implements PictureDAO {
     @Override
     public boolean delete(Connection conn ,String pic_id) {
         String sql = "DELETE FROM pic WHERE pic_id = ? ";
+        String sql1="DELETE FROM comment WHERE comment_pic = ?";
+        update(conn,sql1,pic_id);
         if(update(conn,sql,pic_id) == 1){
             return true;
         }
@@ -47,5 +50,11 @@ public class PictureDAOImpl extends BaseDAO implements PictureDAO {
     public List<Picture> getAllPicture(Connection connection){
         String sql = "select * from  pic";
         return getForList(connection,Picture.class,sql);
+    }
+
+    @Override
+    public String getUserIdByPicId(Connection connection, String pic_id){
+        String sql = "SELECT * FROM album WHERE album_id IN (SELECT pic_album FROM pic WHERE pic_id = ?)";
+        return getForList(connection, Album.class,sql,pic_id).get(0).getAlbum_owner();
     }
 }

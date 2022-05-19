@@ -101,6 +101,7 @@ public class PictureServlet extends HttpServlet {
             String option = req.getParameter("option");
             System.out.println("未分段====="+option);
             switch (option){
+                //获取图片ID 成功返回100
                 case "getPictureID":{
                     String album_id=  req.getParameter("pic_album");
                     System.out.println(album_id);
@@ -114,6 +115,7 @@ public class PictureServlet extends HttpServlet {
                 }
                    break;
 
+                //获取图片信息，失败返回101，成功返回100
                 case "getPictureInfo":{
                     String pic_id=  req.getParameter("pic_id");
                     System.out.println(pic_id);
@@ -133,6 +135,7 @@ public class PictureServlet extends HttpServlet {
                     respWriter.close();
                 }break;
 
+                //删除图片，成功返回100，失败返回101
                 case "deletePicture":{
                     String pic_id=  req.getParameter("pic_id");
                     System.out.println(pic_id);
@@ -146,6 +149,11 @@ public class PictureServlet extends HttpServlet {
                     respWriter.print(data);
                     respWriter.close();
                 }break;
+
+                //修改图片描述，成功返回100，失败返回101
+                case "modifyPictureDesc":{
+
+                }
             }
         }
     }
